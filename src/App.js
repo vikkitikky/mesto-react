@@ -129,7 +129,10 @@ function App() {
         buttonText={'Создать'}
       />
 
-      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+      <ImagePopup
+        card={selectedCard}
+        onClose={closeAllPopups}
+      />
 
       <Footer />
 
