@@ -11,7 +11,7 @@ function Main ({
                  cards,
                  onCardClick
                }) {
-  const cardList = cards.map((cardItem) => <Card card={cardItem} onCardClick={onCardClick}/>)
+  const cardList = cards.map((cardItem, i) => <Card card={cardItem} onCardClick={onCardClick} key={i}/>)
 
   return (
     <main className="content">
