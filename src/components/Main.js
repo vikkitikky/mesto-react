@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from "./Card";
 
 function Main ({
                  onEditAvatar,
@@ -6,14 +7,18 @@ function Main ({
                  onAddPlace,
                  userName,
                  userDescription,
-                 userAvatar
+                 userAvatar,
+                 cards,
+                 onCardClick
                }) {
+  const cardList = cards.map((cardItem) => <Card card={cardItem} onCardClick={onCardClick}/>)
+
   return (
     <main className="content">
 
       <section className="profile">
         <div onClick={onEditAvatar}>
-          <img className="profile__avatar" style={{ backgroundImage: `url(${userAvatar})` }} alt="Аватар" />
+          <img className="profile__avatar" src={userAvatar} alt="Аватар" />
           <div className="profile__edit-avatar"></div>
         </div>
         <div className="profile__info">
@@ -27,7 +32,7 @@ function Main ({
       </section>
 
       <section className="photo">
-
+        {cardList}
       </section>
 
       <section className="popup popup_type_confirm">
