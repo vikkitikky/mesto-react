@@ -1,3 +1,3 @@
 function justForTest() {
-  alert('Я не делаю ничего');
+  console.log('Я не делаю ничего');
 }
