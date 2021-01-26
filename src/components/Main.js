@@ -1,17 +1,32 @@
 import React from 'react';
 import Card from "./Card";
+import api from "../utils/api";
 
 function Main ({
            onEditAvatar,
            onEditProfile,
            onAddPlace,
-           userName,
-           userDescription,
-           userAvatar,
-           cards,
            onCardClick
          }) {
-  const cardList = cards.map((cardItem, i) => <Card card={cardItem} onCardClick={onCardClick} key={i}/>)
+  const [userName, setUserName] = React.useState('...');
+  const [userDescription, setUserDescription] = React.useState('...');
+  const [userAvatar, setUserAvatar] = React.useState('');
+  const [cards, setCards] = React.useState([]);
+
+  React.useEffect(() => {
+    api.prepareDataForRender()
+      .then((([userInfo, cardList] ) => {
+        setUserName(userInfo.name);
+        setUserDescription(userInfo.about);
+        setUserAvatar(userInfo.avatar);
+        setCards([...cardList]);
+      }))
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`)
+      })
+  }, [])
+
+  const cardList = cards.map((cardItem) => <Card card={cardItem} onCardClick={onCardClick} key={cardItem._id}/>)
 
   return (
     <main className="content">
