@@ -3,6 +3,7 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
+import EditProfilePopup from "./EditProfilePopup";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/api";
 import {currentUserContext} from "../contexts/CurrentUserContext";
@@ -83,6 +84,8 @@ function App() {
           <span id="edit-avatar-error" className="popup__error"></span>
         </>
       </PopupWithForm>
+
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 
       <PopupWithForm
         isOpen={isAddPlacePopupOpen}

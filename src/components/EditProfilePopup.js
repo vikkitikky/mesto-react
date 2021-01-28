@@ -1,11 +1,14 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 
-function EditProfilePopup () {
+function EditProfilePopup ({isOpen, onClose}) {
+  const {name, setName} = React.useState('');
+  const {description, setDescription} = React.useState('');
+
   return (
     <PopupWithForm
-      isOpen={isEditProfilePopupOpen}
-      onClose={closeAllPopups}
+      isOpen={isOpen}
+      onClose={onClose}
       name={'edit-profile'}
       title={'Редактировать профиль'}
       buttonText={'Сохранить'}
@@ -21,3 +24,5 @@ function EditProfilePopup () {
     </PopupWithForm>
   )
 }
+
+export default EditProfilePopup;
