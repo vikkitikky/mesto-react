@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from "./Card";
 import api from "../utils/api";
+import {currentUserContext} from "../contexts/CurrentUserContext";
 
 function Main ({
            onEditAvatar,
@@ -8,17 +9,12 @@ function Main ({
            onAddPlace,
            onCardClick
          }) {
-  const [userName, setUserName] = React.useState('...');
-  const [userDescription, setUserDescription] = React.useState('...');
-  const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([]);
+  const currentUser = React.useContext(currentUserContext);
 
   React.useEffect(() => {
     api.prepareDataForRender()
       .then((([userInfo, cardList] ) => {
-        setUserName(userInfo.name);
-        setUserDescription(userInfo.about);
-        setUserAvatar(userInfo.avatar);
         setCards([...cardList]);
       }))
       .catch((err) => {
@@ -26,20 +22,44 @@ function Main ({
       })
   }, [])
 
-  const cardList = cards.map((cardItem) => <Card card={cardItem} onCardClick={onCardClick} key={cardItem._id}/>)
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+    api.changeLikeStatus(card._id, !isLiked).then((newCard) => {
+      const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+      setCards(newCards);
+    });
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCard(card._id)
+      .then(() => {
+        const newCards = cards.filter(c => c._id !== card._id);
+        setCards(newCards);
+      });
+  }
+
+  const cardList = cards.map((cardItem) =>
+    <Card
+    card={cardItem}
+    onCardClick={onCardClick}
+    onCardLike={handleCardLike}
+    onCardDelete={handleCardDelete}
+    key={cardItem._id}
+    />)
 
   return (
     <main className="content">
 
       <section className="profile">
         <div onClick={onEditAvatar}>
-          <img className="profile__avatar" src={userAvatar} alt="Аватар" />
+          <img className="profile__avatar" src={currentUser.avatar} alt="Аватар" />
           <div className="profile__edit-avatar"></div>
         </div>
         <div className="profile__info">
           <div>
-            <h1 className="profile__name">{userName}</h1>
-            <p className="profile__about">{userDescription}</p>
+            <h1 className="profile__name">{currentUser.name}</h1>
+            <p className="profile__about">{currentUser.description}</p>
           </div>
           <button type="button" className="profile__edit-btn" onClick={onEditProfile}></button>
         </div>

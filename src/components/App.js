@@ -4,12 +4,25 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import api from "../utils/api";
+import {currentUserContext} from "../contexts/CurrentUserContext";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({name: '', link: ''});
+  const [currentUser, setCurrentUser] = React.useState({});
+
+  React.useEffect (() => {
+    api.prepareDataForRender()
+      .then(([userProfile, cardList]) => {
+        setCurrentUser(userProfile);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },[])
 
   function handleEditAvatarClick () {
     setIsEditAvatarPopupOpen(true);
@@ -40,11 +53,13 @@ function App() {
     setSelectedCard({name: '', link: ''});
   }
 
-  function handleCardClick ({name, link}) {
-    setSelectedCard({name, link})
+  function handleCardClick (card) {
+    setSelectedCard(card);
   }
 
   return (
+   <currentUserContext.Provider value={currentUser}>
+
     <>
 
       <Header />
@@ -66,23 +81,6 @@ function App() {
         <>
           <input name="avatar" id="edit-avatar" type="url" className="popup__input popup__input_type_avatar" required />
           <span id="edit-avatar-error" className="popup__error"></span>
-        </>
-      </PopupWithForm>
-
-      <PopupWithForm
-        isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}
-        name={'edit-profile'}
-        title={'Редактировать профиль'}
-        buttonText={'Сохранить'}
-      >
-        <>
-          <input name="name" id="edit-name" className="popup__input popup__input_type_name" placeholder="Имя" required
-                 minLength="2" maxLength="40" />
-          <span id="edit-name-error" className="popup__error"></span>
-          <input name="about" id="edit-about" className="popup__input popup__input_type_job" placeholder="О себе"
-                 required minLength="2" maxLength="200" />
-          <span id="edit-about-error" className="popup__error"></span>
         </>
       </PopupWithForm>
 
@@ -111,6 +109,7 @@ function App() {
       <Footer />
 
     </>
+    </currentUserContext.Provider>
   );
 }
 

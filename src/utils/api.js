@@ -20,7 +20,7 @@ class Api {
     });
   }
 
-  getInitialCard() {
+  getCard() {
     return this._sendRequest(`${this._baseUrl}cards`, {
       headers: this._headers
     })
@@ -55,16 +55,9 @@ class Api {
     })
   }
 
-  setLike(cardId) {
+  changeLikeStatus(cardId, isLiked) {
     return this._sendRequest(`${this._baseUrl}cards/likes/${cardId}`, {
-      method: 'PUT',
-      headers: this._headers
-    })
-  }
-
-  removeLike(cardId) {
-    return this._sendRequest(`${this._baseUrl}cards/likes/${cardId}`, {
-      method: 'DELETE',
+      method: (`${isLiked ? 'PUT' : 'DELETE'}`),
       headers: this._headers
     })
   }
@@ -80,7 +73,7 @@ class Api {
   }
 
   prepareDataForRender() {
-    return Promise.all([this.getUserInfo(), this.getInitialCard()])
+    return Promise.all([this.getUserInfo(), this.getCard()])
   }
 }
 

@@ -16,9 +16,11 @@
 @import url(bloks/element/element.css);
 @import url(bloks/element/__img/element__img.css);
 @import url(bloks/element/__delete-btn/element__delete-btn.css);
+@import url(bloks/element/__delete-btn/_hidden/element__delete-btn_hidden.css);
 @import url(bloks/element/__title/element__title.css);
 @import url(bloks/element/__like-group/element__like-group.css);
 @import url(bloks/element/__like-btn/element__like-btn.css);
+@import url(bloks/element/__like-btn/_active/element__like-btn_active.css);
 @import url(bloks/element/__like-count/element__like-count.css);
 @import url(bloks/popup/popup.css);
 @import url(bloks/popup/_visible/popup_visible.css);
