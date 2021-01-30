@@ -22,7 +22,7 @@ function Card ({
   }
 
   function handleDeleteClick() {
-    onCardDelete(card);
+    onCardDelete(card._id);
   }
 
   return (

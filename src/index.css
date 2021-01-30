@@ -30,6 +30,7 @@
 @import url(bloks/popup/__close-btn/popup__close-btn.css);
 @import url(bloks/popup/__title/popup__title.css);
 @import url(bloks/popup/__input/popup__input.css);
+@import url(bloks/popup/__input/_error/popup__input_error.css);
 @import url(bloks/popup/__error/popup__error.css);
 @import url(bloks/popup/__error/_visible/popup__error_visible.css);
 @import url(bloks/popup/__submit-btn/popup__submit-btn.css);

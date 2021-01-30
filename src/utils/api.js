@@ -26,7 +26,7 @@ class Api {
     })
   }
 
-  editUserData(data) {
+  setUserInfo(data) {
     return this._sendRequest(`${this._baseUrl}users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -62,7 +62,7 @@ class Api {
     })
   }
 
-  editAvatar(link) {
+  setAvatar(link) {
     return this._sendRequest(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
