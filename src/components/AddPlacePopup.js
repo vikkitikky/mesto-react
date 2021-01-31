@@ -9,6 +9,10 @@ function AddPlacePopup ({
 }) {
   const name = React.useRef('');
   const link = React.useRef('');
+  const [nameInputValid, setNameInputValid] = React.useState(false);
+  const [linkInputValid, setLinkInputValid] = React.useState(false);
+  const [nameErrorMessage, setNameErrorMessage] = React.useState('');
+  const [linkErrorMessage, setLinkErrorMessage] = React.useState('');
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,7 +24,11 @@ function AddPlacePopup ({
 
   React.useEffect(() => {
     !isOpen && link.current.parentElement.reset();
-  })
+    setLinkInputValid(false);
+    setNameInputValid(false);
+    setNameErrorMessage('');
+    setLinkErrorMessage('');
+  }, [isOpen])
 
   return (
     <PopupWithForm
@@ -30,15 +38,25 @@ function AddPlacePopup ({
       onSubmit={handleSubmit}
       name={'add-img'}
       title={'Новое место'}
-      buttonText={'Создать'}
+      isValid={nameInputValid && linkInputValid}
     >
       <>
         <input name="name" id="add-title" className="popup__input popup__input_type_title" placeholder="Название"
-               required minLength="2" maxLength="30" ref={name} />
-        <span id="add-title-error" className="popup__error"></span>
+               required minLength="2" maxLength="30" ref={name}
+               onInput={()=> {
+                 setNameInputValid(name.current.validity.valid);
+                 setNameErrorMessage(name.current.validationMessage);
+               }}
+        />
+        <span id="add-title-error" className="popup__error">{nameErrorMessage}</span>
         <input name="link" id="add-url" type="url" className="popup__input popup__input_type_src"
-               placeholder="Ссылка на картинку" required ref={link} />
-        <span id="add-url-error" className="popup__error"></span>
+               placeholder="Ссылка на картинку" required ref={link}
+               onInput={() => {
+                 setLinkInputValid(link.current.validity.valid);
+                 setLinkErrorMessage(link.current.validationMessage);
+               }}
+        />
+        <span id="add-url-error" className="popup__error">{linkErrorMessage}</span>
       </>
     </PopupWithForm>
   )

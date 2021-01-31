@@ -16,7 +16,7 @@ function SubmitDeletePopup ({isOpen, onClose, stopClose, onDelete}) {
       onSubmit={handleSubmit}
       name={'confirm-form'}
       title={'Вы уверены?'}
-      buttonText={'Да'}
+      isValid={true}
     >
     </PopupWithForm>
   )

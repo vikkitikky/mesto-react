@@ -3,9 +3,13 @@ import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup({isOpen, onClose, stopClose, onUpdateAvatar}) {
   const avatar = React.useRef('');
+  const [avatarInputValid, setAvatarInputValid] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState('');
 
   React.useEffect(() => {
     !isOpen && avatar.current.parentElement.reset();
+    setAvatarInputValid(false);
+    setErrorMessage('');
   }, [isOpen])
 
   function handleSubmit(e) {
@@ -24,12 +28,15 @@ function EditAvatarPopup({isOpen, onClose, stopClose, onUpdateAvatar}) {
       onSubmit={handleSubmit}
       name={'edit-avatar'}
       title={'Обновить аватар'}
-      buttonText={'Сохранить'}
+      isValid={avatarInputValid}
     >
       <>
         <input name="avatar" id="edit-avatar" type="url" ref={avatar} className="popup__input popup__input_type_avatar"
-               required />
-        <span id="edit-avatar-error" className="popup__error"></span>
+               required onInput={() => {
+                 setAvatarInputValid(avatar.current.validity.valid);
+                 setErrorMessage(avatar.current.validationMessage);
+        }}/>
+        <span id="edit-avatar-error" className="popup__error">{errorMessage}</span>
       </>
     </PopupWithForm>
   )
