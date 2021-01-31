@@ -1,5 +1,5 @@
 import React from 'react';
-import {loadingContext} from "../contexts/LoadingContext";
+import {LoadingContext} from "../contexts/LoadingContext";
 
 function PopupWithForm ({
                           isOpen,
@@ -11,12 +11,12 @@ function PopupWithForm ({
                           children,
                           isValid
 }) {
-  const loadingText = React.useContext(loadingContext);
+  const loadingText = React.useContext(LoadingContext);
 
   return (
-    <section className={`popup popup_type_${name} ${isOpen && ' popup_visible'}`} onClick={onClose}>
-      <form className='popup__form' name={name} onSubmit={onSubmit} noValidate onClick={stopClose}>
-        <button type="button" className="popup__close-btn" onClick={onClose}></button>
+    <section className={`popup popup_type_${name} ${isOpen && ' popup_visible'}`} onMouseDown={onClose}>
+      <form className='popup__form' name={name} onSubmit={onSubmit} noValidate onMouseDown={stopClose}>
+        <button type="button" className="popup__close-btn" onMouseDown={onClose}></button>
         <h3 className="popup__title">{title}</h3>
         {children}
         <button type="submit" disabled={!isValid} className="popup__submit-btn">{loadingText}</button>

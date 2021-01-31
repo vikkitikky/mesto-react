@@ -1,10 +1,10 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
-import {currentUserContext} from '../contexts/CurrentUserContext';
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 
 function EditProfilePopup ({isOpen, onClose, stopClose, onUpdateUser}) {
-  const currentUser = React.useContext(currentUserContext);
+  const currentUser = React.useContext(CurrentUserContext);
   const [name, setName] = React.useState(currentUser.name);
   const [description, setDescription] = React.useState(currentUser.description);
   const [inputName, setInputNameValid] = React.useState(false);
@@ -41,20 +41,22 @@ function EditProfilePopup ({isOpen, onClose, stopClose, onUpdateUser}) {
     >
       <>
         <input name="name" id="edit-name" className="popup__input popup__input_type_name" placeholder="Имя" required
-               minLength="2" maxLength="40" defaultValue={name} onChange={e => setName(e.target.value)}
-               onInput={e => {
+               minLength="2" maxLength="40" value={name || ""}
+               onChange={e => {
+                 setName(e.target.value);
                  setInputNameValid(e.target.validity.valid);
                  setNameErrorMessage(e.target.validationMessage);
                }}
         />
         <span id="edit-name-error" className="popup__error">{nameErrorMessage}</span>
         <input name="about" id="edit-about" className="popup__input popup__input_type_job" placeholder="О себе"
-               required minLength="2" maxLength="200" defaultValue={description}
-               onChange={e => setDescription(e.target.value)}
-               onInput={e => {
+               required minLength="2" maxLength="200" value={description || ""}
+               onChange={e => {
+                 setDescription(e.target.value);
                  setInputAboutValid(e.target.validity.valid);
                  setAboutErrorMessage(e.target.validationMessage);
-               }}
+               }
+               }
         />
         <span id="edit-about-error" className="popup__error">{aboutErrorMessage}</span>
       </>

@@ -6,10 +6,10 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from './EditAvatarPopup';
 import ImagePopup from "./ImagePopup";
 import api from "../utils/api";
-import {currentUserContext} from "../contexts/CurrentUserContext";
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import AddPlacePopup from "./AddPlacePopup";
 import SubmitDeletePopup from "./SubmitDeletePopup";
-import {loadingContext} from "../contexts/LoadingContext";
+import {LoadingContext} from "../contexts/LoadingContext";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -27,7 +27,7 @@ function App() {
     api.prepareDataForRender()
       .then(([userProfile, cardList]) => {
         setCurrentUser(userProfile);
-        setCards([...cardList]);
+        setCards(cardList);
       })
       .catch(err => {
         console.log(err)
@@ -146,7 +146,7 @@ function App() {
   }
 
   return (
-   <currentUserContext.Provider value={currentUser}>
+   <CurrentUserContext.Provider value={currentUser}>
      <Header />
      <Main
        cards={cards}
@@ -160,7 +160,7 @@ function App() {
 
      <Footer />
 
-     <loadingContext.Provider value={loadingText}>
+     <LoadingContext.Provider value={loadingText}>
        <EditAvatarPopup
          isOpen={isEditAvatarPopupOpen}
          onClose={closeAllPopups}
@@ -194,8 +194,8 @@ function App() {
          stopClose={stopEvent}
          onDelete={handleCardDelete}
        />
-     </loadingContext.Provider>
-    </currentUserContext.Provider>
+     </LoadingContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 

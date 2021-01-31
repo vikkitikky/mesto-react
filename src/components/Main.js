@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from "./Card";
-import {currentUserContext} from "../contexts/CurrentUserContext";
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function Main ({
            cards,
@@ -11,16 +11,19 @@ function Main ({
            onAddPlace,
            onCardClick
          }) {
-  const currentUser = React.useContext(currentUserContext);
 
-  const cardList = cards.map((cardItem) =>
-    <Card
-    card={cardItem}
-    onCardClick={onCardClick}
-    onCardLike={onCardLike}
-    onCardDelete={onCardDelete}
-    key={cardItem._id}
-    />)
+  const currentUser = React.useContext(CurrentUserContext);
+
+  const cardList = cards.map((cardItem) =>  (
+        <Card
+          card={cardItem}
+          onCardClick={onCardClick}
+          onCardLike={onCardLike}
+          onCardDelete={onCardDelete}
+          key={cardItem._id}
+        />
+      )
+  );
 
   return (
     <main className="content">
