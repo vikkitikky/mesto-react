@@ -20,7 +20,7 @@ function EditAvatarPopup({isOpen, onClose, stopClose, onUpdateAvatar}) {
     });
   }
 
-  return(
+  return (
     <PopupWithForm
       isOpen={isOpen}
       onClose={onClose}
@@ -31,10 +31,10 @@ function EditAvatarPopup({isOpen, onClose, stopClose, onUpdateAvatar}) {
       isValid={avatarInputValid}
     >
       <>
-        <input name="avatar" id="edit-avatar" type="url" ref={avatar} className="popup__input popup__input_type_avatar"
+        <input name="avatar" id="edit-avatar" type="url" ref={avatar} className="popup__input"
                required onInput={() => {
-                 setAvatarInputValid(avatar.current.validity.valid);
-                 setErrorMessage(avatar.current.validationMessage);
+          setAvatarInputValid(avatar.current.validity.valid);
+          setErrorMessage(avatar.current.validationMessage);
         }}/>
         <span id="edit-avatar-error" className="popup__error">{errorMessage}</span>
       </>

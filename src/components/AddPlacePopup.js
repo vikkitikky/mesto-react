@@ -1,12 +1,12 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup ({
-                          isOpen,
-                          onClose,
-                          stopClose,
-                          onAddPlace
-}) {
+function AddPlacePopup({
+                         isOpen,
+                         onClose,
+                         stopClose,
+                         onAddPlace
+                       }) {
   const name = React.useRef('');
   const link = React.useRef('');
   const [nameInputValid, setNameInputValid] = React.useState(false);
@@ -43,7 +43,7 @@ function AddPlacePopup ({
       <>
         <input name="name" id="add-title" className="popup__input popup__input_type_title" placeholder="Название"
                required minLength="2" maxLength="30" ref={name}
-               onInput={()=> {
+               onInput={() => {
                  setNameInputValid(name.current.validity.valid);
                  setNameErrorMessage(name.current.validationMessage);
                }}

@@ -2,27 +2,27 @@ import React from 'react';
 import Card from "./Card";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
-function Main ({
-           cards,
-           onCardLike,
-           onCardDelete,
-           onEditAvatar,
-           onEditProfile,
-           onAddPlace,
-           onCardClick
-         }) {
+function Main({
+                cards,
+                onCardLike,
+                onCardDelete,
+                onEditAvatar,
+                onEditProfile,
+                onAddPlace,
+                onCardClick
+              }) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
-  const cardList = cards.map((cardItem) =>  (
-        <Card
-          card={cardItem}
-          onCardClick={onCardClick}
-          onCardLike={onCardLike}
-          onCardDelete={onCardDelete}
-          key={cardItem._id}
-        />
-      )
+  const cardList = cards.map((cardItem) => (
+      <Card
+        card={cardItem}
+        onCardClick={onCardClick}
+        onCardLike={onCardLike}
+        onCardDelete={onCardDelete}
+        key={cardItem._id}
+      />
+    )
   );
 
   return (
@@ -30,7 +30,7 @@ function Main ({
 
       <section className="profile">
         <div onClick={onEditAvatar}>
-          <img className="profile__avatar" src={currentUser.avatar} alt="Аватар" />
+          <img className="profile__avatar" src={currentUser.avatar} alt="Аватар"/>
           <div className="profile__edit-avatar"></div>
         </div>
         <div className="profile__info">
@@ -48,10 +48,10 @@ function Main ({
       </section>
 
       <section className="popup popup_type_confirm">
-        <form className="popup__form popup__form_type_confirm" name="confirm-form" noValidate>
+        <form className="form popup__form_type_confirm" name="confirm-form" noValidate>
           <button type="button" className="popup__close-btn popup__close-btn_form_confirm"></button>
-          <h3 className="popup__title">Вы уверены?</h3>
-          <button type="submit" className="popup__submit-btn popup__submit-btn_form_add">Да</button>
+          <h3 className="form__title">Вы уверены?</h3>
+          <button type="submit" className="form__submit-btn popup__submit-btn_form_add">Да</button>
         </form>
       </section>
 

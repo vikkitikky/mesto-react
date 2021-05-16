@@ -7,7 +7,7 @@ class Api {
   _sendRequest(link, params) {
     return fetch(link, params)
       .then((res) => {
-        if(res.ok) {
+        if (res.ok) {
           return res.json();
         }
         return Promise.reject(`Ошибка: ${res.status}`)

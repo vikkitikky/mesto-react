@@ -3,7 +3,7 @@ import PopupWithForm from "./PopupWithForm";
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 
-function EditProfilePopup ({isOpen, onClose, stopClose, onUpdateUser}) {
+function EditProfilePopup({isOpen, onClose, stopClose, onUpdateUser}) {
   const currentUser = React.useContext(CurrentUserContext);
   const [name, setName] = React.useState(currentUser.name);
   const [description, setDescription] = React.useState(currentUser.description);
@@ -40,7 +40,7 @@ function EditProfilePopup ({isOpen, onClose, stopClose, onUpdateUser}) {
       isValid={inputName && inputAbout}
     >
       <>
-        <input name="name" id="edit-name" className="popup__input popup__input_type_name" placeholder="Имя" required
+        <input name="name" id="edit-name" className="popup__input" placeholder="Имя" required
                minLength="2" maxLength="40" value={name || ""}
                onChange={e => {
                  setName(e.target.value);
@@ -49,7 +49,7 @@ function EditProfilePopup ({isOpen, onClose, stopClose, onUpdateUser}) {
                }}
         />
         <span id="edit-name-error" className="popup__error">{nameErrorMessage}</span>
-        <input name="about" id="edit-about" className="popup__input popup__input_type_job" placeholder="О себе"
+        <input name="about" id="edit-about" className="popup__input" placeholder="О себе"
                required minLength="2" maxLength="200" value={description || ""}
                onChange={e => {
                  setDescription(e.target.value);

@@ -1,7 +1,7 @@
 import React from 'react';
 import PopupWithForm from "./PopupWithForm";
 
-function SubmitDeletePopup ({isOpen, onClose, stopClose, onDelete}) {
+function SubmitDeletePopup({isOpen, onClose, stopClose, onDelete}) {
 
   function handleSubmit(e) {
     e.preventDefault();

@@ -1,3 +1,1 @@
-function justForTest() {
-  console.log('Я не делаю ничего');
-}
+export const BASE_URL = 'https://auth.nomoreparties.co/'
